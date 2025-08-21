@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+    This is the cart page. Proceed to review your items and place the order.
+{% endblock %}
+
+{% block title %}
+    Shopping Cart - Mintmade Fashion
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% if not cart_items %}
+        <!-- Empty Cart -->
+        <div class="empty-cart">
+            <div class="text-center">
+                <i class="fas fa-shopping-cart fa-4x text-muted mb-4"></i>
+                <h1 class="empty-cart-title">Your Shopping Cart is Empty</h1>
+                <p class="empty-cart-text">
+                    Looks like you haven't added any items to your cart yet.
+                </p>
+                <a href="{% url 'shop:allProdCat' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-shopping-bag me-2"></i>Start Shopping
+                </a>
+            </div>
+        </div>
+    {% else %}
+        <!-- Cart Header -->
+        <div class="cart-header">
+            <h1><i class="fas fa-shopping-cart me-2"></i>Your Shopping Cart</h1>
+            <p>Review your items before proceeding to checkout</p>
+        </div>
+
+        <div class="row">
+            <!-- Cart Items -->
+            <div class="col-lg-8">
+                <div class="cart-items">
+                    <div class="cart-items-header">
+                        <h3>Cart Items ({{ cart_items|length }})</h3>
+                    </div>
+                    
+                    {% for cart_item in cart_items %}
+                    <div class="cart-item">
+                        <div class="cart-item-image">
+                            <a href="{{ cart_item.product.get_absolute_url }}">
+                                <img src="{{ cart_item.product.image.url }}" alt="{{ cart_item.product.name }}" class="cart-product-image">
+                            </a>
+                        </div>
+                        <div class="cart-item-details">
+                            <h4>{{ cart_item.product.name }}</h4>
+                            <p class="cart-item-sku">SKU: {{ cart_item.product.id }}</p>
+                            <p class="cart-item-price">${{ cart_item.product.price }}</p>
+                        </div>
+                        <div class="cart-item-quantity">
+                            <div class="quantity-controls">
+                                {% if cart_item.quantity < cart_item.product.stock %}
+                                    <a href="{% url 'cart:add_cart' cart_item.product.id %}" class="quantity-btn">
+                                        <i class="fas fa-plus"></i>
+                                    </a>
+                                {% endif %}
+                                <span class="quantity-display">{{ cart_item.quantity }}</span>
+                                <a href="{% url 'cart:cart_remove_one' cart_item.product.id %}" class="quantity-btn">
+                                    <i class="fas fa-minus"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="cart-item-subtotal">
+                            <span class="subtotal-label">Subtotal:</span>
+                            <span class="subtotal-amount">${{ cart_item.sub_total }}</span>
+                        </div>
+                        <div class="cart-item-actions">
+                            <a href="{% url 'cart:cart_remove_item' cart_item.product.id %}" class="btn btn-outline-danger btn-sm">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="col-lg-4">
+                <div class="cart-summary">
+                    <div class="cart-summary-header">
+                        <h3>Order Summary</h3>
+                    </div>
+                    <div class="cart-summary-content">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span>${{ cart_total }}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping:</span>
+                            <span>Free</span>
+                        </div>
+                        <hr class="summary-divider">
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span>${{ cart_total }}</span>
+                        </div>
+                    </div>
+                    <div class="cart-summary-actions">
+                        <a href="{% url 'shop:allProdCat' %}" class="btn btn-outline-primary w-100 mb-2">
+                            <i class="fas fa-arrow-left me-2"></i>Continue Shopping
+                        </a>
+                        <button class="btn btn-primary w-100">
+                            <i class="fas fa-credit-card me-2"></i>Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

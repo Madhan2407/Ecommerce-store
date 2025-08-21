@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if category %}
+        {{ product.name }} - Mintmade Fashion
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <a href="{% url 'shop:allProdCat' %}">Home</a> / 
+        <a href="{{product.category.get_url}}">{{product.category}}</a> / 
+        <span>{{product.name}}</span>
+    </nav>
+
+    <!-- Product Detail -->
+    <div class="product-detail">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="product-image-container">
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/banner.png' %}{% endif %}" alt="{{product.name}}" class="product-main-image">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="product-info">
+                    <h1 class="product-title">{{product.name}}</h1>
+                    <div class="product-price">${{product.price}}</div>
+                    
+                    <div class="product-description">
+                        <h5>Description</h5>
+                        <p>{{product.description}}</p>
+                    </div>
+                    
+                    <div class="product-actions">
+                        {% if product.stock <= 0 %}
+                            <div class="out-of-stock">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <span>Out of Stock</span>
+                            </div>
+                        {% else %}
+                            <a class="btn btn-primary btn-lg" href="{% url 'cart:add_cart' product.id %}">
+                                <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                            </a>
+                            <div class="stock-info">
+                                <i class="fas fa-check-circle me-2"></i>
+                                <span>In Stock ({{product.stock}} available)</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

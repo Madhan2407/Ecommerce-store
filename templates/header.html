@@ -1,0 +1,17 @@
+{% load static %}
+<header class="modern-header">
+    <div class="container">
+        <div class="header-content">
+            <a href="{% url 'shop:allProdCat' %}" class="logo-link">
+                <img src="{% static 'img/logo.png' %}" alt="Mintmade Fashion Logo" class="logo" loading="eager">
+            </a>
+            <div class="header-text">
+                <h1 class="brand-name">Macyx Fashion</h1>
+                <p class="tagline">Explore Your Style, Find Your Look</p>
+            </div>
+        </div>
+        <div class="text-center mt-3">
+            <img src="{% static 'img/banner.png' %}" alt="Banner" style="max-width:100%;height:auto;border-radius:1rem;box-shadow:var(--glass-shadow);" loading="lazy">
+        </div>
+    </div>
+</header>
