@@ -1,54 +1,53 @@
-Ecommerce-Store
+# Ecommerce-Store
 
 A simple e-commerce website built with Django, HTML, CSS, and JavaScript. It lets users browse products, search, and manage a shopping cart.
 
-Features
+## ✨ Features
 
-Browse products by category
+* Browse products by category
+* Add/remove items from cart
+* Product search
+* Responsive design
 
-Add/remove items from cart
+## 🛠 Tech Stack
 
-Product search
+* **Backend:** Django (Python)
+* **Frontend:** HTML, CSS, JavaScript
+* **Database:** SQLite
 
-Responsive design
+## ⚡ Installation
 
-Tech Stack
+1. Clone the repo:
 
-Backend: Django (Python)
+   ```bash
+   git clone https://github.com/Madhan2407/Ecommerce-store.git
+   cd Ecommerce-store
+   ```
+2. Create and activate a virtual environment:
 
-Frontend: HTML, CSS, JavaScript
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate   # On Windows use venv\Scripts\activate
+   ```
+3. Install dependencies:
 
-Database: SQLite
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Run migrations and start the server:
 
-Installation
+   ```bash
+   python manage.py migrate
+   python manage.py runserver
+   ```
+5. Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser.
 
-Clone the repo:
+## 🚀 Future Improvements
 
-git clone https://github.com/Madhan2407/Ecommerce-store.git
-cd Ecommerce-store
+* User authentication
+* Online payments
+* Admin dashboard for products
 
-Create and activate a virtual environment:
+---
 
-python3 -m venv venv
-source venv/bin/activate   # On Windows use venv\Scripts\activate
-
-Install dependencies:
-
-pip install -r requirements.txt
-
-Run migrations and start the server:
-
-python manage.py migrate
-python manage.py runserver
-
-Open http://127.0.0.1:8000/ in your browser.
-
-Future Improvements
-
-User authentication
-
-Online payments
-
-Admin dashboard for products
-
-Made with ❤️ using Django.
+Made with Django.
